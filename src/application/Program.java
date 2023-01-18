@@ -8,6 +8,7 @@ import java.util.Scanner;
 import model.entities.Contract;
 import model.entities.Installment;
 import model.services.ContractService;
+import model.services.PaypalService;
 
 public class Program {
 
@@ -30,8 +31,10 @@ public class Program {
 		System.out.print("Número de parcelas: ");
 		int n = sc.nextInt();
 		
-		ContractService contractService = new ContractService(null);
+		ContractService contractService = new ContractService(new PaypalService());
 		contractService.processContract(contract, n);
+		
+		System.out.println();
 		System.out.println("Parcelas:");
 		for (Installment installment : contract.getInstallments()) {
 			System.out.println(installment);
